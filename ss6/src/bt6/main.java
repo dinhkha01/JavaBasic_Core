@@ -15,19 +15,19 @@ public class main {
             System.out.print("mat khau phai  hon 6 ki tu");
             return;
         }
-        if(!Pattern.compile("[A-Z]").matcher(pass).find()){
+        if(!pass.matches(".*[A-Z]+.*")){
             System.out.print("mk phai chua ki tu in hoa");
             return;
         };
-        if(!Pattern.compile("[a-z]").matcher(pass).find()){
+        if(!pass.matches(".*[a-z]+.*")){
             System.out.print("mk phai chua ki tu thuong");
             return;
         };
-       if(!Pattern.compile("[0-9]").matcher(pass).find()){
+       if(!pass.matches(".*[0-9]+.*")){
            System.out.print("mk phai chua so");
            return;
        };
-       if(!Pattern.compile("[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]").matcher(pass).find()){
+       if(!pass.matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/?]+.*")){
            System.out.print("mk phai chua ki tu dac biet");
            return;
 

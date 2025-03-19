@@ -10,9 +10,8 @@ public class main {
         System.out.print("nhap email vao");
         String email = sc.nextLine();
         String regex = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,}$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(email);
-        if(m.matches()){
+
+        if(email.matches(regex)){
             System.out.print("email hop le");
         } else{
             System.out.print("email khong hop le");
