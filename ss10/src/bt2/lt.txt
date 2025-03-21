@@ -1,0 +1,100 @@
+Tôi sẽ giải thích khái niệm kế thừa trong Java và trả lời các câu hỏi của bạn.
+1. Kế thừa là gì? Nó giúp ích gì trong lập trình hướng đối tượng?
+Kế thừa (Inheritance) là một trong những nguyên lý cơ bản của lập trình hướng đối tượng, cho phép một lớp (lớp con/subclass) kế thừa các thuộc tính và phương thức từ một lớp khác (lớp cha/superclass). Lớp con có thể sử dụng lại, mở rộng hoặc ghi đè các phương thức và thuộc tính của lớp cha.
+Kế thừa giúp ích trong lập trình hướng đối tượng bằng cách:
+
+Tái sử dụng mã nguồn, giảm việc viết lại mã
+Tạo cấu trúc phân cấp rõ ràng giữa các đối tượng
+Cho phép tính đa hình (polymorphism)
+Giúp tổ chức mã nguồn theo cách logic và dễ bảo trì
+
+2. Sự khác biệt giữa kế thừa và bao đóng (encapsulation) trong Java là gì?
+Kế thừa (Inheritance):
+
+Tạo mối quan hệ "is-a" giữa các lớp (ví dụ: Dog is a Animal)
+Cho phép lớp con sử dụng lại mã từ lớp cha
+Tập trung vào việc mở rộng chức năng
+
+Bao đóng (Encapsulation):
+
+Là việc "đóng gói" dữ liệu và phương thức trong một đơn vị (lớp)
+Ẩn chi tiết triển khai bên trong thông qua các thuộc tính private
+Cung cấp các phương thức công khai để truy cập và thay đổi dữ liệu (getters, setters)
+Tập trung vào việc bảo vệ dữ liệu và kiểm soát truy cập
+
+Tóm lại, kế thừa liên quan đến mối quan hệ giữa các lớp, trong khi bao đóng liên quan đến việc ẩn và bảo vệ thông tin bên trong một lớp.
+3. Viết một ví dụ ngắn giải thích cách sử dụng từ khóa extends để tạo lớp con kế thừa các thuộc tính và phương thức từ lớp cha:
+// Lớp cha (superclass)
+class Animal {
+    protected String name;
+    protected int age;
+
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void eat() {
+        System.out.println(name + " đang ăn");
+    }
+
+    public void sleep() {
+        System.out.println(name + " đang ngủ");
+    }
+}
+
+// Lớp con (subclass) sử dụng từ khóa extends để kế thừa từ lớp Animal
+class Dog extends Animal {
+    private String breed; // Thuộc tính riêng của lớp Dog
+
+    public Dog(String name, int age, String breed) {
+        super(name, age); // Gọi constructor của lớp cha
+        this.breed = breed;
+    }
+
+    // Mở rộng thêm phương thức mới
+    public void bark() {
+        System.out.println(name + " đang sủa: Gâu gâu!");
+    }
+
+    // Ghi đè (override) phương thức của lớp cha
+    @Override
+    public void eat() {
+        System.out.println(name + " đang ăn thức ăn cho chó");
+    }
+}
+
+// Sử dụng
+public class Main {
+    public static void main(String[] args) {
+        Dog myDog = new Dog("Rex", 3, "Husky");
+        myDog.eat();   // Phương thức đã ghi đè
+        myDog.sleep(); // Phương thức được kế thừa từ lớp cha
+        myDog.bark();  // Phương thức mới của lớp con
+    }
+}
+
+Trong ví dụ này:
+
+Lớp Dog kế thừa từ lớp Animal bằng từ khóa extends
+Lớp Dog kế thừa các thuộc tính (name, age) và phương thức (eat(), sleep()) từ lớp Animal
+Lớp con sử dụng super() để gọi constructor của lớp cha
+Lớp Dog ghi đè phương thức eat() để thay đổi hành vi
+Lớp Dog thêm thuộc tính mới (breed) và phương thức mới (bark())
+
+4. Hãy chỉ ra các lợi ích và hạn chế khi sử dụng kế thừa trong Java?
+Lợi ích:
+
+Tái sử dụng mã: Giảm trùng lặp mã, tiết kiệm thời gian và công sức
+Mở rộng dễ dàng: Có thể mở rộng chức năng của lớp cha mà không cần sửa đổi mã nguồn gốc
+Tính đa hình: Cho phép sử dụng tham chiếu lớp cha để trỏ đến đối tượng lớp con
+Cấu trúc phân cấp rõ ràng: Tạo mối quan hệ "is-a" giữa các lớp, giúp tổ chức mã nguồn theo cách logic
+Giảm độ phức tạp: Phân chia tính năng thành các lớp riêng biệt
+
+Hạn chế:
+
+Ràng buộc chặt chẽ (Tight coupling): Lớp con phụ thuộc vào triển khai của lớp cha, làm cho việc thay đổi lớp cha trở nên khó khăn
+Vấn đề với đa kế thừa: Java không hỗ trợ đa kế thừa lớp, chỉ có thể kế thừa từ một lớp
+Phương thức không mong muốn: Lớp con có thể kế thừa các phương thức không cần thiết từ lớp cha
+Sự phức tạp khi cấu trúc phân cấp quá sâu: Cấu trúc kế thừa nhiều tầng có thể gây khó khăn trong việc hiểu và bảo trì
+Vấn đề với con trỏ "fragile base class": Thay đổi trong lớp cha có thể vô tình ảnh hưởng đến lớp con

@@ -1,0 +1,108 @@
+1. Tính đóng gói là gì? Tại sao tính đóng gói lại quan trọng trong lập trình đối tượng?
+Tính đóng gói (Encapsulation) là một trong bốn tính chất cơ bản của lập trình hướng đối tượng, cho phép ẩn các thông tin và chi tiết triển khai bên trong một đối tượng, chỉ cho phép truy cập thông qua các phương thức công khai (public methods).
+Tính đóng gói quan trọng trong lập trình đối tượng vì:
+
+Bảo vệ dữ liệu: Ngăn chặn truy cập trực tiếp và không kiểm soát đến dữ liệu của đối tượng
+Tăng tính mô-đun: Cho phép thay đổi triển khai bên trong mà không ảnh hưởng đến code bên ngoài
+Giảm sự phức tạp: Ẩn chi tiết triển khai, giúp người sử dụng tập trung vào cách sử dụng đối tượng
+Tăng tính bảo trì: Dễ dàng sửa đổi, nâng cấp và bảo trì code
+
+2. Làm thế nào để áp dụng tính đóng gói trong Java? Giải thích cách sử dụng các phương thức getter và setter.
+Trong Java, tính đóng gói được thực hiện thông qua:
+
+Khai báo thuộc tính private: Thuộc tính được khai báo với từ khóa private để ngăn truy cập trực tiếp từ bên ngoài lớp.
+Cung cấp phương thức getter và setter công khai:
+
+Getter: Phương thức để lấy giá trị của thuộc tính private
+Setter: Phương thức để cập nhật giá trị của thuộc tính private, có thể bao gồm kiểm tra tính hợp lệ
+3. Cho ví dụ về cách sử dụng tính đóng gói trong một lớp có thuộc tính name, age (thuộc tính private), và phương thức getter và setter để truy xuất và thay đổi giá trị của chúng.
+public class Person {
+    // Các thuộc tính private
+    private String name;
+    private int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.setAge(age); // Sử dụng setter để kiểm tra tính hợp lệ
+    }
+
+    // Getter cho name
+    public String getName() {
+        return name;
+    }
+
+    // Setter cho name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter cho age
+    public int getAge() {
+        return age;
+    }
+
+    // Setter cho age với kiểm tra tính hợp lệ
+    public void setAge(int age) {
+        if (age >= 0 && age <= 120) {
+            this.age = age;
+        } else {
+            System.out.println("Tuổi không hợp lệ! Phải từ 0 đến 120.");
+        }
+    }
+
+    // Phương thức hiển thị thông tin
+    public void displayInfo() {
+        System.out.println("Tên: " + name + ", Tuổi: " + age);
+    }
+}
+
+// Sử dụng lớp Person
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person("Nguyễn Văn A", 25);
+
+        // Truy cập thông qua getter
+        System.out.println("Tên: " + person.getName());
+
+        // Thay đổi thông qua setter
+        person.setAge(30);
+        person.displayInfo();
+
+        // Kiểm tra tính hợp lệ
+        person.setAge(150); // Sẽ in ra thông báo lỗi
+        person.displayInfo(); // Tuổi vẫn là 30
+    }
+}
+
+4. Lợi ích của việc sử dụng tính đóng gói trong việc bảo vệ dữ liệu và kiểm soát quyền truy cập là gì?
+Lợi ích của tính đóng gói trong bảo vệ dữ liệu và kiểm soát quyền truy cập:
+
+Kiểm soát dữ liệu:
+
+Có thể kiểm tra tính hợp lệ trước khi cập nhật giá trị
+Ngăn chặn việc gán giá trị không hợp lệ cho thuộc tính
+
+
+Chỉ đọc (Read-only) hoặc chỉ ghi (Write-only):
+
+Có thể tạo thuộc tính chỉ đọc bằng cách chỉ cung cấp getter
+Có thể tạo thuộc tính chỉ ghi bằng cách chỉ cung cấp setter
+
+
+Kiểm soát truy cập:
+
+Giới hạn quyền truy cập và thay đổi dữ liệu
+Có thể theo dõi và ghi lại việc truy cập hoặc thay đổi dữ liệu
+
+
+Bảo vệ tính toàn vẹn dữ liệu:
+
+Đảm bảo dữ liệu luôn ở trạng thái hợp lệ
+Ngăn chặn các thay đổi vô tình làm hỏng dữ liệu
+
+
+Độc lập triển khai:
+
+Có thể thay đổi cách lưu trữ dữ liệu nội bộ mà không ảnh hưởng đến code bên ngoài
+Dễ dàng nâng cấp và mở rộng hệ thống
