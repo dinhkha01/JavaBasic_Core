@@ -1,0 +1,21 @@
+Tính trừu tượng trong Lập trình Hướng Đối tượng Java
+Phần định nghĩa
+Tính trừu tượng trong lập trình hướng đối tượng là quá trình ẩn đi các chi tiết triển khai phức tạp và chỉ hiển thị những chức năng thiết yếu cho người dùng. Nó cho phép lập trình viên tập trung vào những gì một đối tượng làm thay vì quan tâm đến cách nó hoạt động bên trong. Tính trừu tượng giúp kiểm soát độ phức tạp của chương trình, tăng tính bảo mật và cho phép xây dựng mã nguồn dễ bảo trì, dễ mở rộng. Đây là một trong những nguyên tắc cơ bản của lập trình hướng đối tượng giúp tạo ra phần mềm có cấu trúc rõ ràng và dễ quản lý.
+Phần phân tích
+Tại sao cần tính trừu tượng trong phần mềm phức tạp?
+
+Kiểm soát độ phức tạp: Tính trừu tượng cho phép phân chia hệ thống phức tạp thành các thành phần nhỏ hơn, dễ quản lý.
+Tập trung vào mục tiêu chính: Lập trình viên có thể tập trung vào "cái gì" cần làm thay vì "làm thế nào".
+Bảo mật và an toàn: Che giấu chi tiết triển khai giúp tăng tính bảo mật và ngăn chặn truy cập trái phép.
+Dễ bảo trì và mở rộng: Khi cần thay đổi chi tiết triển khai, chỉ cần sửa đổi bên trong mà không ảnh hưởng đến code sử dụng lớp đó.
+Tái sử dụng code: Tính trừu tượng tạo điều kiện thuận lợi cho việc tái sử dụng code.
+
+Sự khác biệt giữa lớp trừu tượng và giao diện trong Java
+hinh anh trong file
+Liên hệ thực tế
+Ví dụ: Máy ATM
+Máy ATM là một ví dụ điển hình về tính trừu tượng:
+
+Giao diện người dùng: Người dùng chỉ nhìn thấy màn hình, bàn phím và khe rút tiền - đây là sự trừu tượng hóa của hệ thống phức tạp bên trong.
+Các tính năng hiển thị: Rút tiền, kiểm tra số dư, chuyển khoản - người dùng không cần biết máy ATM kết nối với ngân hàng như thế nào, hay tiền được đếm ra sao.
+Ẩn sự phức tạp: Toàn bộ hệ thống an ninh, kết nối mạng, xử lý giao dịch, và cơ chế đếm tiền đều được ẩn đi.
