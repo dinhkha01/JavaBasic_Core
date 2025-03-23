@@ -28,7 +28,7 @@ public class main {
     // Kiểm tra tính hợp lệ của dữ liệu
     public static boolean validateStudent(Student student) {
         // Kiểm tra GPA
-        if (student.getGpa() < 0 || student.getGpa() > 4.0) {
+        if (student.getGpa() < 0) {
             return false;
         }
 
