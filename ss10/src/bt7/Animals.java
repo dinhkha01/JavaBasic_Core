@@ -1,4 +1,4 @@
-package bt8;
+package bt7;
 
 public class Animals {
     private String name;

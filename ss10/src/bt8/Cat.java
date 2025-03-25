@@ -1,6 +1,9 @@
 package bt8;
 
-public class Cat extends  Animals {
+
+import bt7.Animals;
+
+public class Cat extends Animals {
     private String furColor;
     public Cat(String name, int age, String furColor) {
         super(name, age);

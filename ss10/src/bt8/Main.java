@@ -1,5 +1,8 @@
 package bt8;
 
+
+import bt7.Animals;
+
 public class Main {
     public static void addAnimal(Animals[] animals, int[] count, Animals animal, int Max){
         if(count[0] < Max){
