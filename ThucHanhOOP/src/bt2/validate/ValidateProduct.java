@@ -47,5 +47,28 @@ public class ValidateProduct {
             System.out.println("So luong phai lon hon 0");
         }
     }
+    public static boolean validateStatus(Scanner sc){
+        while (true){
+            System.out.println("Nhap trang thai (true/false):");
+            String status = sc.nextLine().trim().toLowerCase();
+            if(status.equals("true") || status.equals("false")){
+                return Boolean.parseBoolean(status);
+            }
+            System.out.println("Trang thai phai la true hoac false");
+        }
+
+    };
+    public static String validateDescription(Scanner sc){
+        while(true){
+            System.out.println("Nhap mo ta cua san pham de: ");
+            String description = sc.nextLine();
+            if(!description.isEmpty()){
+                return description;
+            }
+            System.out.println("Mo tả ko dc để trống !!! ");
+
+        }
+    }
+
 
 }
