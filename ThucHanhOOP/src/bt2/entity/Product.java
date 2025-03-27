@@ -1,5 +1,10 @@
 package bt2.entity;
 
+import bt2.business.ProductManager;
+import bt2.validate.ValidateProduct;
+
+import java.util.Scanner;
+
 public class Product {
     private String productId;
     private String productName;
@@ -87,6 +92,15 @@ public class Product {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+    public void inputData(Scanner sc ){
+        this.productId = ValidateProduct.validateIdProduct(sc);
+        this.productName = ValidateProduct.validateNameProduct(sc);
+        this.imporPrice = ValidateProduct.validateImportPrice(sc);
+        this.exportPrice = ValidateProduct.validateExportPrice(sc, imporPrice);
+        this.quantity = ValidateProduct.validateQuantity(sc);
+        this.descriptions = ValidateProduct.validateDescription(sc);
+        this.status = ValidateProduct.validateStatus(sc);
     }
     public float calculateProfit(){
         return profit = exportPrice - imporPrice ;

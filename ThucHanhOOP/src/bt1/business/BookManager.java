@@ -8,8 +8,9 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class BookManager {
-    private Book[] books;
-    private int size;
+    public static Book[] books;
+    public static int size;
+;
 
     public BookManager() {
         books = new Book[100];
@@ -21,21 +22,17 @@ public class BookManager {
             System.out.println("Danh sach sach da day");
             return;
         }
-        System.out.println("Nhap thong tin cua sach thu " + (size +1));
-        String bookId = UUID.randomUUID().toString();
-        System.out.print("Nhap ten sach: ");
-        String bookName = ValidatorBook.validateName(sc,books,size);
-        System.out.print("Giá nhập: ");
-        float importPrice = ValidatorBook.validateImportPrice(sc);
-        System.out.print("Giá xuất: ");
-        float exportPrice = ValidatorBook.validateExportPrice(sc, importPrice);
-        sc.nextLine();
-        System.out.print("Tac giả: ");
-        String author = ValidatorBook.validateAuthor(sc);
-        System.out.print("Năm xuat ban: ");
-        int publishYear = ValidatorBook.validateYear(sc);
-        books[size] = new Book(bookId,bookName,importPrice,exportPrice,author,publishYear);
+        Book book = new Book();
+        book.inputData(sc);
+        books[size] = book;
         size++;
+    }
+    public void calculateInterest(){
+        for( int i =0; i< size ; i ++ ){
+            books[i].calculateInterest();
+
+        }
+        System.out.println("Đã tính lợi nhuận ");
     }
     public void displayAllBooks() {
         if (size == 0) {
@@ -89,11 +86,11 @@ public class BookManager {
         for (int i = 0; i < size; i++) {
             if (books[i].getBookName().equalsIgnoreCase(name)) {
                 books[i].displayData();
-                found = true;
+                found = true;                                                                                                                                                                                                                                            
             }
         }
         if (!found) {
-            System.out.println("không tìm thấy sách: " + name);
+            System.err.println("không tìm thấy sách: " + name);
         }
 
     }

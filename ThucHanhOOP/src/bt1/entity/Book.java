@@ -1,5 +1,10 @@
 package bt1.entity;
 
+import bt1.validate.ValidatorBook;
+
+import java.util.Scanner;
+import java.util.UUID;
+
 public class Book {
     private String bookId;
     private String bookName;
@@ -18,7 +23,6 @@ public class Book {
         this.importPrice = importPrice;
         this.exportPrice = exportPrice;
         this.author = author;
-        this.interest = (exportPrice - importPrice);
         this.year = year;
     }
 
@@ -77,6 +81,18 @@ public class Book {
     public void setYear(int year) {
         this.year = year;
     }
+    public void inputData(Scanner sc){
+        this.bookId = UUID.randomUUID().toString();
+        this.bookName = ValidatorBook.validateName(sc);
+        this.importPrice = ValidatorBook.validateImportPrice(sc);
+        this.exportPrice = ValidatorBook.validateExportPrice(sc, importPrice);
+        this.author = ValidatorBook.validateAuthor(sc);
+        this.year = ValidatorBook.validateYear(sc);
+    }
+    public void calculateInterest(){
+        this.interest = exportPrice - importPrice;
+    };
+
     public void displayData() {
         System.out.println("Mã sách: " + bookId);
         System.out.println("Tên sách: " + bookName);
@@ -87,4 +103,6 @@ public class Book {
         System.out.println("Năm xuất bản: " + year);
         System.out.println("----------------------------------");
     }
+
+
 }

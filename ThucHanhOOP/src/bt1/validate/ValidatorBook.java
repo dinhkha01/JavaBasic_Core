@@ -3,19 +3,24 @@ package bt1.validate;
 import bt1.entity.Book;
 
 import java.util.Scanner;
+import static bt1.business.BookManager.*;
+
 
 public class ValidatorBook {
-    public static String validateName(Scanner sc, Book[] books, int size){
+    public static String validateName(Scanner sc){
         while(true) {
-            System.out.println("\"Nhập tên sách (4 ký tự, bắt đầu bằng B): \"");
-            String name = sc.nextLine();
-            if(name.length() == 4 && name.startsWith("B") && isBookNameUnique(name, books,size)){
-                return name;
+            String name = InputMethod.inputString(sc,"Nhập tên sách (4 ki tu va bat dau bang chu B)", "Tên sách không được để trống") ;
+            if(name.length() == 4 && name.startsWith("B")){
+                if( isBookNameUnique(name)) {
+                    return name;
+                }
+                System.err.println("Tên sách đã tồn tại");
+                continue;
             }
-            System.out.println("Tên sách đã tồn tại hoặc không hop lệ! Vui lòng nhập lại.");
+            System.err.println(" Ten sach không hop lệ! Vui lòng nhập lại.");
         }
     }
-    public static boolean isBookNameUnique(String name , Book[] books , int size){
+    public static boolean isBookNameUnique(String name){
         for(int i =0 ; i < size ; i++){
             if(books[i].getBookName().equals(name)) return false;
         }
@@ -25,35 +30,35 @@ public class ValidatorBook {
     public static float validateImportPrice(Scanner sc){
         while(true){
             System.out.println("Nhập giá nhập (lớn hơn 0): ");
-            float price = sc.nextFloat();
+            float price = InputMethod.inputFloat(sc,"giá nhập phải là số");
             if(price > 0) return price;
-            System.out.println("Giá nhập phải lớn hơn 0.");
+            System.err.println("Giá nhập phải lớn hơn 0.");
 
         }
     }
     public static float validateExportPrice(Scanner sc, float importPrice){
+        System.out.println("Nhập giá xuất (lớn hơn ít nhất 30% giá nhập): ");
         while(true){
-            System.out.println("Nhập giá xuất (lớn hơn ít nhất 30% giá nhập): ");
-            float price = sc.nextFloat();
+            float price = InputMethod.inputFloat(sc,"giá bán phải là số");
             if(price >= importPrice * 1.3 ) return price;
-            System.out.println("Giá xuất phải lớn hơn ít nhất 30% giá nhập.");
+            System.err.println("Giá bán phải lớn hơn ít nhất 30% giá nhập.");
 
         }
     }
     public  static String validateAuthor(Scanner sc){
         while(true){
-            System.out.println("Nhập tác giả (6-50 ký tự):  ");
-            String author = sc.nextLine();
-            if( author.length() >= 6 && author.length() <= 50  ) return author;
-            System.out.println("Tác giả phải có từ 6-50 ký tự.");
+            String author = InputMethod.inputString(sc, "Nhập tác giả (6-50 ký tự)","Tên tác giả không dc để trống");
+            ValidateString validate = new ValidateString(6,50);
+            if( validate.isValid(author)) return author;
+            System.err.println(validate.errorMassage());
         }
     }
     public static int validateYear(Scanner sc){
+        System.out.print("Nhập năm xuất bản (sau 2000): ");
         while(true){
-            System.out.print("Nhập năm xuất bản (sau 2000): ");
-            int year = Integer.parseInt(sc.nextLine());
+            int year = InputMethod.inputInt(sc,"Năm xuất bản phải là số");
             if(year >= 2000) return year;
-            System.out.println("Năm xuất bản phải sau 2000.");
+            System.err.println("Năm xuất bản phải sau 2000.");
         }
     }
 
