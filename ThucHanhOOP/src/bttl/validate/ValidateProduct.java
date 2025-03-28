@@ -25,7 +25,7 @@ public class ValidateProduct {
     }
     public static String validateDescriptions(Scanner sc){
         while (true){
-            String description = InputMethod.inputString(sc,"Nhập tiêu đề của sản phẩm","Tiêu đề sản phẩm không được để trống");
+            String description = InputMethod.inputString(sc,"Nhập mô tả sản phẩm của sản phẩm","Mô tả sản phẩm sản phẩm không được để trống");
             ValidateString val = new ValidateString(6,50);
             if(val.isVal(description)){
                 return description;

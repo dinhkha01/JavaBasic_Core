@@ -116,6 +116,14 @@ public class Product implements IProduct{
 
     @Override
     public void disPlayData() {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("Title: " + title);
+        System.out.println("Descriptions: " + descriptions);
+        System.out.println("Import Price: " + importPrice);
+        System.out.println("Export Price: " + exportPrice);
+        System.out.println("Interest: " + interest);
+        System.out.println("Status: " + (status? "Đang bán" : "Không bán"));
 
     }
 }
