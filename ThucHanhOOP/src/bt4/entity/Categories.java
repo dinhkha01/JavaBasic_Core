@@ -1,5 +1,7 @@
 package bt4.entity;
 
+import bt4.validate.ValidateCategory;
+
 import java.util.Scanner;
 
 public class Categories implements IApp {
@@ -52,6 +54,9 @@ public class Categories implements IApp {
 
     @Override
     public void inputData(Scanner sc) {
+        categoryName = ValidateCategory.validateNameCategory(sc);
+        descriptions = ValidateCategory.validateDescriptionCate(sc);
+        categoryStatus = ValidateCategory.validateStatusCate(sc);
 
     }
 
