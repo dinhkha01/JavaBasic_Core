@@ -13,6 +13,7 @@ public class main {
         int randomInt = rad.nextInt(10000);
         int indexRandom = rad.nextInt(3);
 
+
 // tạo ID thì dùng UUID hàm dựng sẵn
 
     }

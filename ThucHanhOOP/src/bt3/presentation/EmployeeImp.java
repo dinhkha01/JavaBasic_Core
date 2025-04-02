@@ -13,14 +13,14 @@ public class EmployeeImp {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         while(true){
-            System.out.println("-----------Menu---------------");
-            System.out.println("1. Nhập thông tin cho n nhân viên  (n nhập từ bàn phím) ");
-            System.out.println("2. Hiển thị thông tin nhân viên");
-            System.out.println("3. Tính lương cho các nhân viên ");
-            System.out.println("4. Tìm kiếm nhân viên theo tên nhân viên ");
-            System.out.println("5. Cập nhật thông tin nhân viên ");
-            System.out.println("6. Xóa nhân viên theo mã nhân viên ");
-            System.out.println("7. Exit");
+            System.out.println(" ----------------------------Student Menu----------------------------");
+            System.out.println("1. Hiển thị danh sách sinh viên ");
+            System.out.println("2. Thêm mới sinh viên");
+            System.out.println("3. Chỉnh sửa thông tin sinh viên\n ");
+            System.out.println("4. Xóa sinh viên\n ");
+            System.out.println("5. Tìm kiếm sinh viên\n ");
+            System.out.println("6. Sắp xếp  ");
+            System.out.println("0. Exit");
             System.out.print("Moi ban chon: ");
             int choice = Integer.parseInt(sc.nextLine());
             switch (choice){
@@ -43,7 +43,7 @@ public class EmployeeImp {
                 case 6:
                     deleteEmployee();
                     break;
-                case 7:
+                case 0:
                     System.exit(0);
                 default:
                     System.out.println("Lua chon khong hop le");
