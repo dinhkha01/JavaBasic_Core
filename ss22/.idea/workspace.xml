@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="faf06b1b-f51b-4c9b-ad41-b3f0b827facb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../s18/Sessison18 - Map Interface.xmind" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt1/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt1/out.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt2/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt2/a.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt3/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt3/coppy.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt3/in.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt4/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt4/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt5/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bt6/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sessison22- File và làm việc với file.xmind" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ss22.iml" beforeDir="false" />
-    </list>
+    <list default="true" id="faf06b1b-f51b-4c9b-ad41-b3f0b827facb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,10 +13,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2vR3MibDKJ1lwNmmYwrmrVBuDYv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -47,7 +26,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging master",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -60,8 +39,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
       </set>
     </attachedChunks>
   </component>
@@ -74,6 +53,7 @@
       <option name="presentableId" value="Default" />
       <updated>1744094013819</updated>
       <workItem from="1744094016363" duration="1096000" />
+      <workItem from="1744161176332" duration="19000" />
     </task>
     <servers />
   </component>
