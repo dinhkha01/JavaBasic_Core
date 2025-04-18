@@ -38,7 +38,7 @@ public class Main {
         System.out.println("----------------------------------");
         System.out.print("Nhập ID phòng ban: ");
         int deptId = Integer.parseInt(scanner.nextLine());
-        // Tham số thứ 2 là OUT parameter
+
         try (CallableStatement cstmt = con.prepareCall("{call calculateTotalSalaryByDept(?, ?)}")) {
             cstmt.setInt(1, deptId);
             cstmt.registerOutParameter(2, Types.DOUBLE);

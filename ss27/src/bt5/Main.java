@@ -24,7 +24,7 @@ public class Main {
         // Tạo bảng department
         String createDeptSql = "CREATE TABLE IF NOT EXISTS department (" +
                 "id INT PRIMARY KEY AUTO_INCREMENT, " +
-                "name VARCHAR(50))";  // Đã thêm dấu đóng ngoặc
+                "name VARCHAR(50))";
 
         // Tạo bảng employee
         String createEmpSql = "CREATE TABLE IF NOT EXISTS employee (" +
@@ -35,7 +35,7 @@ public class Main {
                 "FOREIGN KEY (department_id) REFERENCES department(id))";
 
         try (Statement stmt = con.createStatement()) {
-            // Tạo bảng
+
             stmt.executeUpdate(createDeptSql);
             stmt.executeUpdate(createEmpSql);
 
@@ -47,7 +47,7 @@ public class Main {
             stmt.executeUpdate("INSERT INTO department (name) VALUES " +
                     "('IT'), ('HR'), ('Finance'), ('Marketing')");
 
-            // Lấy ID của các phòng ban vừa thêm
+
             ResultSet rs = stmt.executeQuery("SELECT id FROM department ORDER BY id");
             int[] deptIds = new int[4];
             int i = 0;
@@ -55,7 +55,7 @@ public class Main {
                 deptIds[i++] = rs.getInt(1);
             }
 
-            // Thêm nhân viên với department_id hợp lệ
+
             stmt.executeUpdate("INSERT INTO employee (name, salary, department_id) VALUES " +
                     "('Kha', 5000, " + deptIds[0] + "), " +
                     "('Hao', 6000, " + deptIds[1] + "), " +
@@ -81,7 +81,7 @@ public class Main {
 
             ps.setString(1,name );
 
-            // Thực thi truy vấn
+
             try (ResultSet rs = ps.executeQuery()) {
                 System.out.println("\nKẾT QUẢ TÌM KIẾM");
                 boolean hasResult = false;
