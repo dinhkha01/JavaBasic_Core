@@ -1,0 +1,163 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS library_management;
+USE library_management;
+
+-- Create book_type table
+CREATE TABLE IF NOT EXISTS book_type (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type_name VARCHAR(255) NOT NULL,
+    description LONGTEXT,
+    is_deleted BIT(1) DEFAULT FALSE
+);
+
+-- Create books table
+CREATE TABLE IF NOT EXISTS books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    book_name VARCHAR(255),
+    author VARCHAR(255),
+    content LONGTEXT,
+    total_pages INT,
+    publisher VARCHAR(255),
+    price DOUBLE,
+    type_id INT,
+    is_deleted BIT(1) DEFAULT FALSE,
+    FOREIGN KEY (type_id) REFERENCES book_type(id)
+);
+
+-- Stored procedures for book_type
+DELIMITER //
+
+-- Get all book types
+CREATE PROCEDURE get_all_book_types()
+BEGIN
+    SELECT * FROM book_type WHERE is_deleted = FALSE;
+END //
+
+-- Get book type by ID
+CREATE PROCEDURE get_book_type_by_id(IN p_id INT)
+BEGIN
+    SELECT * FROM book_type WHERE id = p_id AND is_deleted = FALSE;
+END //
+
+-- Insert new book type
+CREATE PROCEDURE insert_book_type(
+    IN p_type_name VARCHAR(255),
+    IN p_description LONGTEXT,
+    IN p_is_deleted BIT(1)
+)
+BEGIN
+    INSERT INTO book_type (type_name, description, is_deleted)
+    VALUES (p_type_name, p_description, p_is_deleted);
+END //
+
+-- Update book type
+CREATE PROCEDURE update_book_type(
+    IN p_id INT,
+    IN p_type_name VARCHAR(255),
+    IN p_description LONGTEXT,
+    IN p_is_deleted BIT(1)
+)
+BEGIN
+    UPDATE book_type
+    SET type_name = p_type_name,
+        description = p_description,
+        is_deleted = p_is_deleted
+    WHERE id = p_id;
+END //
+
+-- Delete book type (soft delete)
+CREATE PROCEDURE delete_book_type(IN p_id INT)
+BEGIN
+    UPDATE book_type SET is_deleted = TRUE WHERE id = p_id;
+END //
+
+-- Count books by type ID
+CREATE PROCEDURE count_books_by_type_id(IN p_type_id INT)
+BEGIN
+    SELECT COUNT(*) FROM books WHERE type_id = p_type_id AND is_deleted = FALSE;
+END //
+
+-- Stored procedures for books
+-- Get all books
+CREATE PROCEDURE get_all_books()
+BEGIN
+    SELECT * FROM books WHERE is_deleted = FALSE;
+END //
+
+-- Get book by ID
+CREATE PROCEDURE get_book_by_id(IN p_id INT)
+BEGIN
+    SELECT * FROM books WHERE id = p_id AND is_deleted = FALSE;
+END //
+
+-- Insert new book
+CREATE PROCEDURE insert_book(
+    IN p_book_name VARCHAR(255),
+    IN p_author VARCHAR(255),
+    IN p_content LONGTEXT,
+    IN p_total_pages INT,
+    IN p_publisher VARCHAR(255),
+    IN p_price DOUBLE,
+    IN p_type_id INT,
+    IN p_is_deleted BIT(1)
+)
+BEGIN
+    INSERT INTO books (book_name, author, content, total_pages, publisher, price, type_id, is_deleted)
+    VALUES (p_book_name, p_author, p_content, p_total_pages, p_publisher, p_price, p_type_id, p_is_deleted);
+END //
+
+-- Update book
+CREATE PROCEDURE update_book(
+    IN p_id INT,
+    IN p_book_name VARCHAR(255),
+    IN p_author VARCHAR(255),
+    IN p_content LONGTEXT,
+    IN p_total_pages INT,
+    IN p_publisher VARCHAR(255),
+    IN p_price DOUBLE,
+    IN p_type_id INT,
+    IN p_is_deleted BIT(1)
+)
+BEGIN
+    UPDATE books
+    SET book_name = p_book_name,
+        author = p_author,
+        content = p_content,
+        total_pages = p_total_pages,
+        publisher = p_publisher,
+        price = p_price,
+        type_id = p_type_id,
+        is_deleted = p_is_deleted
+    WHERE id = p_id;
+END //
+
+-- Delete book (soft delete)
+CREATE PROCEDURE delete_book(IN p_id INT)
+BEGIN
+    UPDATE books SET is_deleted = TRUE WHERE id = p_id;
+END //
+
+-- Get books ordered by price descending
+CREATE PROCEDURE get_books_order_by_price_desc()
+BEGIN
+    SELECT * FROM books WHERE is_deleted = FALSE ORDER BY price DESC;
+END //
+
+-- Search books by name or content
+CREATE PROCEDURE search_books_by_name_or_content(IN p_keyword VARCHAR(255))
+BEGIN
+    SELECT * FROM books
+    WHERE is_deleted = FALSE
+    AND (book_name LIKE CONCAT('%', p_keyword, '%') OR content LIKE CONCAT('%', p_keyword, '%'));
+END //
+
+-- Count books grouped by type
+CREATE PROCEDURE count_books_group_by_type()
+BEGIN
+    SELECT type_id, COUNT(*) as book_count
+    FROM books
+    WHERE is_deleted = FALSE
+    GROUP BY type_id;
+END //
+
+DELIMITER ;
