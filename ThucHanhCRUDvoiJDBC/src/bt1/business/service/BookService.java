@@ -83,12 +83,77 @@ public class BookService {
             return;
         }
 
-        System.out.println("Thông tin hiện tại:");
-        book.displayData();
-        System.out.println("Nhập thông tin mới:");
-        book.inputData(scanner);
-        bookBusiness.save(book);
-        System.out.println("Cập nhật sách thành công.");
+        boolean isEditing = true;
+        while (isEditing) {
+            System.out.println("Thông tin hiện tại:");
+            book.displayData();
+            System.out.println("Chọn trường cần chỉnh sửa:");
+            System.out.println("1. Tên sách");
+            System.out.println("2. Tác giả");
+            System.out.println("3. Nội dung");
+            System.out.println("4. Số trang");
+            System.out.println("5. Nhà xuất bản");
+            System.out.println("6. Giá");
+            System.out.println("7. Mã loại sách");
+            System.out.println("8. Hoàn tất chỉnh sửa");
+            System.out.print("Lựa chọn của bạn: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Nhập tên sách mới: ");
+                    book.setBookName(scanner.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nhập tác giả mới: ");
+                    book.setAuthor(scanner.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Nhập nội dung mới: ");
+                    book.setContent(scanner.nextLine());
+                    break;
+                case 4:
+                    System.out.print("Nhập số trang mới: ");
+                    book.setTotalPages(Integer.parseInt(scanner.nextLine()));
+                    break;
+                case 5:
+                    System.out.print("Nhập nhà xuất bản mới: ");
+                    book.setPublisher(scanner.nextLine());
+                    break;
+                case 6:
+                    System.out.print("Nhập giá mới: ");
+                    book.setPrice(Double.parseDouble(scanner.nextLine()));
+                    break;
+                case 7:
+                    System.out.println("Danh sách loại sách:");
+                    List<BookType> bookTypes = bookTypeBusiness.findAll();
+                    for (BookType type : bookTypes) {
+                        System.out.printf("ID: %d - Tên: %s%n", type.getId(), type.getTypeName());
+                    }
+                    System.out.print("Nhập mã loại sách mới: ");
+                    int typeId = Integer.parseInt(scanner.nextLine());
+                    // Kiểm tra typeId hợp lệ
+                    boolean validType = bookTypes.stream().anyMatch(t -> t.getId() == typeId);
+                    if (validType) {
+                        book.setTypeId(typeId);
+                    } else {
+                        System.out.println("Mã loại sách không tồn tại!");
+                    }
+                    break;
+                case 8:
+                    isEditing = false;
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
+            }
+        }
+
+        try {
+            bookBusiness.save(book);
+            System.out.println("Cập nhật sách thành công.");
+        } catch (Exception e) {
+            System.out.println("Lỗi khi cập nhật: " + e.getMessage());
+        }
     }
 
     public void deleteBook() {

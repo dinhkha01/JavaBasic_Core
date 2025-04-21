@@ -7,7 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookTypeBusiness {
+public class BookTypeBusiness implements IBookTypeDao {
+    @Override
     public List<BookType> findAll() {
         List<BookType> bookTypes = new ArrayList<>();
         Connection connection = null;
@@ -41,6 +42,7 @@ public class BookTypeBusiness {
         return bookTypes;
     }
 
+    @Override
     public BookType findById(Integer id) {
         Connection connection = null;
         CallableStatement callSt = null;
@@ -74,6 +76,7 @@ public class BookTypeBusiness {
         return null;
     }
 
+    @Override
     public void save(BookType bookType) {
         Connection connection = null;
         CallableStatement callSt = null;
@@ -107,6 +110,7 @@ public class BookTypeBusiness {
         }
     }
 
+    @Override
     public void deleteById(Integer id) {
         Connection connection = null;
         CallableStatement callSt = null;

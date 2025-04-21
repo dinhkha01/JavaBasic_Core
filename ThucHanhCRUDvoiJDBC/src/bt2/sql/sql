@@ -1,0 +1,171 @@
+-- Tạo bảng Categories
+CREATE TABLE Categories (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(255) NOT NULL UNIQUE,
+    category_status BIT(1) DEFAULT 1
+);
+
+-- Tạo bảng Products
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(255) NOT NULL UNIQUE,
+    price DOUBLE CHECK (price > 0),
+    quantity INT DEFAULT 0,
+    view INT DEFAULT 0,
+    category_id INT,
+    product_status BIT(1) DEFAULT 1,
+    created_at DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id)
+);
+
+-- Categories Procedures
+
+-- Find all categories sorted by name
+DELIMITER //
+CREATE PROCEDURE sp_findAllCategoriesSortedByName()
+BEGIN
+    SELECT * FROM Categories WHERE category_status = 1 ORDER BY category_name ASC;
+END //
+DELIMITER ;
+
+-- Find all categories
+DELIMITER //
+CREATE PROCEDURE sp_findAllCategories()
+BEGIN
+    SELECT * FROM Categories WHERE category_status = 1;
+END //
+DELIMITER ;
+
+-- Search categories by name
+DELIMITER //
+CREATE PROCEDURE sp_searchCategoriesByName(IN keyword VARCHAR(255))
+BEGIN
+    SELECT * FROM Categories WHERE category_name LIKE CONCAT('%', keyword, '%') AND category_status = 1;
+END //
+DELIMITER ;
+
+-- Update category status
+DELIMITER //
+CREATE PROCEDURE sp_updateCategoryStatus(IN id INT, IN status BIT)
+BEGIN
+    UPDATE Categories SET category_status = status WHERE category_id = id;
+END //
+DELIMITER ;
+
+-- Check if category has products
+DELIMITER //
+CREATE PROCEDURE sp_hasProducts(IN categoryId INT, OUT hasProducts BOOLEAN)
+BEGIN
+    DECLARE count_products INT;
+    SELECT COUNT(*) INTO count_products FROM Products WHERE category_id = categoryId;
+    SET hasProducts = (count_products > 0);
+END //
+DELIMITER ;
+
+-- Count categories by status
+DELIMITER //
+CREATE PROCEDURE sp_countCategoriesByStatus()
+BEGIN
+    SELECT category_status, COUNT(*) FROM Categories GROUP BY category_status;
+END //
+DELIMITER ;
+
+-- Find category by id
+DELIMITER //
+CREATE PROCEDURE sp_findCategoryById(IN id INT)
+BEGIN
+    SELECT * FROM Categories WHERE category_id = id;
+END //
+DELIMITER ;
+
+-- Insert category
+DELIMITER //
+CREATE PROCEDURE sp_insertCategory(IN name VARCHAR(255), IN status BIT)
+BEGIN
+    INSERT INTO Categories (category_name, category_status) VALUES (name, status);
+END //
+DELIMITER ;
+
+-- Update category
+DELIMITER //
+CREATE PROCEDURE sp_updateCategory(IN id INT, IN name VARCHAR(255), IN status BIT)
+BEGIN
+    UPDATE Categories SET category_name = name, category_status = status WHERE category_id = id;
+END //
+DELIMITER ;
+
+-- Delete category
+DELIMITER //
+CREATE PROCEDURE sp_deleteCategory(IN id INT)
+BEGIN
+    DELETE FROM Categories WHERE category_id = id;
+END //
+DELIMITER ;
+
+-- Products Procedures
+
+-- Find all products
+DELIMITER //
+CREATE PROCEDURE sp_findAllProducts()
+BEGIN
+    SELECT * FROM Products WHERE product_status = 1;
+END //
+DELIMITER ;
+
+-- Find product by id
+DELIMITER //
+CREATE PROCEDURE sp_findProductById(IN id INT)
+BEGIN
+    SELECT * FROM Products WHERE product_id = id;
+END //
+DELIMITER ;
+
+-- Insert product
+DELIMITER //
+CREATE PROCEDURE sp_insertProduct(
+    IN name VARCHAR(255),
+    IN price DOUBLE,
+    IN quantity INT,
+    IN view INT,
+    IN categoryId INT,
+    IN status BIT,
+    IN createdDate DATE
+)
+BEGIN
+    INSERT INTO Products (product_name, price, quantity, view, category_id, product_status, created_at)
+    VALUES (name, price, quantity, view, categoryId, status, createdDate);
+END //
+DELIMITER ;
+
+-- Update product
+DELIMITER //
+CREATE PROCEDURE sp_updateProduct(
+    IN id INT,
+    IN name VARCHAR(255),
+    IN price DOUBLE,
+    IN quantity INT,
+    IN view INT,
+    IN categoryId INT,
+    IN status BIT,
+    IN createdDate DATE
+)
+BEGIN
+    UPDATE Products
+    SET product_name = name,
+        price = price,
+        quantity = quantity,
+        view = view,
+        category_id = categoryId,
+        product_status = status,
+        created_at = createdDate
+    WHERE product_id = id;
+END //
+DELIMITER ;
+
+-- Delete product
+DELIMITER //
+CREATE PROCEDURE sp_deleteProduct(IN id INT)
+BEGIN
+    DELETE FROM Products WHERE product_id = id;
+END //
+DELIMITER ;

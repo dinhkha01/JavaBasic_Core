@@ -45,12 +45,40 @@ public class BookTypeService {
             return;
         }
 
-        System.out.println("Thông tin hiện tại:");
-        bookType.displayData();
-        System.out.println("Nhập thông tin mới:");
-        bookType.inputData(scanner);
-        bookTypeBusiness.save(bookType);
-        System.out.println("Cập nhật loại sách thành công.");
+        boolean isEditing = true;
+        while (isEditing) {
+            System.out.println("Thông tin hiện tại:");
+            bookType.displayData();
+            System.out.println("Chọn trường cần chỉnh sửa:");
+            System.out.println("1. Tên loại sách");
+            System.out.println("2. Mô tả");
+            System.out.println("3. Hoàn tất chỉnh sửa");
+            System.out.print("Lựa chọn của bạn: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Nhập tên loại sách mới: ");
+                    bookType.setTypeName(scanner.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nhập mô tả mới: ");
+                    bookType.setDescription(scanner.nextLine());
+                    break;
+                case 3:
+                    isEditing = false;
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ.");
+            }
+        }
+
+        try {
+            bookTypeBusiness.save(bookType);
+            System.out.println("Cập nhật loại sách thành công.");
+        } catch (Exception e) {
+            System.out.println("Lỗi khi cập nhật: " + e.getMessage());
+        }
     }
 
     public void deleteBookType() {
