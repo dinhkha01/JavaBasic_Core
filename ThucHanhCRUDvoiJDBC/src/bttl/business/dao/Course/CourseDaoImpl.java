@@ -59,20 +59,20 @@ public class CourseDaoImpl implements ICourse {
     public void save(Courses course) {
         try {
             if (course.getId() > 0) {
-                // Update existing course
+
                 CallableStatement callStmt = connection.prepareCall("{CALL sp_updateCourse(?, ?, ?)}");
                 callStmt.setInt(1, course.getId());
                 callStmt.setString(2, course.getName());
                 callStmt.setString(3, course.getDescription());
                 callStmt.executeUpdate();
             } else {
-                // Insert new course
+
                 CallableStatement callStmt = connection.prepareCall("{CALL sp_addCourse(?, ?)}");
                 callStmt.setString(1, course.getName());
                 callStmt.setString(2, course.getDescription());
                 callStmt.executeUpdate();
 
-                // Get the auto-increment ID
+
                 Statement stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
                 if (rs.next()) {
@@ -119,6 +119,6 @@ public class CourseDaoImpl implements ICourse {
             System.err.println("Error checking course name uniqueness: " + e.getMessage());
         }
 
-        return false; // Assume not unique in case of error
+        return false;
     }
 }

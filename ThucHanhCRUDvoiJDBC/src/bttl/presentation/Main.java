@@ -24,7 +24,7 @@ public class Main {
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void main(String[] args) {
-        // Initialize services (in a real app, you would use dependency injection)
+
         try (Connection conn = ConnectionDB.openConnection()) {
             if (conn != null) {
                 courseService = new CourseService(new CourseDaoImpl(conn));
@@ -178,7 +178,7 @@ public class Main {
         System.out.println("\n--- Update Course ---");
         System.out.print("Enter course ID to update: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         Courses existing = courseService.getCourseById(id);
         if (existing == null) {
@@ -217,7 +217,7 @@ public class Main {
         System.out.println("\n--- Delete Course ---");
         System.out.print("Enter course ID to delete: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         if (courseService.deleteCourse(id)) {
             System.out.println("Course deleted successfully!");
@@ -266,7 +266,7 @@ public class Main {
 
         System.out.print("Enter student sex (1 for Male, 0 for Female): ");
         student.setSex(scanner.nextInt() == 1);
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter student birth date (dd/MM/yyyy): ");
         try {
@@ -278,12 +278,12 @@ public class Main {
 
         System.out.print("Enter course ID: ");
         student.setCourseId(scanner.nextInt());
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         System.out.print("Enter avatar file path (optional): ");
         student.setAvatar(scanner.nextLine());
 
-        student.setStatus(true); // Default to active
+        student.setStatus(true);
 
         if (!ValidateStudent.validate(student)) {
             System.out.println("Invalid student data. Please check your input.");
@@ -386,7 +386,6 @@ public class Main {
         System.out.println("\n--- Search Students by Name ---");
         System.out.print("Enter student name to search: ");
         String name = scanner.nextLine();
-
         List<Students> students = studentService.searchStudentsByName(name);
         if (students.isEmpty()) {
             System.out.println("No students found with name containing: " + name);

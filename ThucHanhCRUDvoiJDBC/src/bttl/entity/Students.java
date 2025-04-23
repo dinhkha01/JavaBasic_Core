@@ -14,7 +14,7 @@ public class Students {
     private String avatar;
     private boolean status;
 
-    // Constructors, getters, setters
+
     public Students() {}
 
     public Students(String id, String name, String email, String phone, boolean sex,
@@ -30,7 +30,7 @@ public class Students {
         this.status = status;
     }
 
-    // Getters and setters
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public String getName() { return name; }

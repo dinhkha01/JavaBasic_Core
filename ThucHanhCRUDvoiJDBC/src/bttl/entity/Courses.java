@@ -6,7 +6,7 @@ public class Courses {
     private String name;
     private String description;
 
-    // Constructors, getters, setters
+
     public Courses() {}
 
     public Courses(int id, String name, String description) {
@@ -15,7 +15,7 @@ public class Courses {
         this.description = description;
     }
 
-    // Getters and setters
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getName() { return name; }

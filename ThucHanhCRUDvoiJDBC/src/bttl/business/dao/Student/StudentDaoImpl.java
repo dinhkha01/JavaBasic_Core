@@ -90,7 +90,7 @@ public class StudentDaoImpl implements IStudent {
         try (CallableStatement callStmt = connection.prepareCall("{CALL sp_deleteStudent(?)}")) {
             callStmt.setString(1, id);
             callStmt.executeUpdate();
-            return true; // Assuming the stored procedure executes successfully
+            return true;
         } catch (SQLException e) {
             System.err.println("Error deleting student: " + e.getMessage());
             return false;
@@ -133,7 +133,7 @@ public class StudentDaoImpl implements IStudent {
             System.err.println("Error checking email uniqueness: " + e.getMessage());
         }
 
-        return false; // Assume not unique in case of error
+        return false;
     }
 
     @Override
@@ -152,7 +152,7 @@ public class StudentDaoImpl implements IStudent {
             System.err.println("Error checking phone uniqueness: " + e.getMessage());
         }
 
-        return false; // Assume not unique in case of error
+        return false;
     }
 
     private Students extractStudentFromResultSet(ResultSet resultSet) throws SQLException {
