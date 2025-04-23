@@ -1,4 +1,4 @@
-package bt6;
+package bttl.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,10 +6,9 @@ import java.sql.SQLException;
 
 public class ConnectionDB {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/ss27_db_5?createDatabaseIfNotExist=true";
+    private static final String URL = "jdbc:mysql://localhost:3306/ss29_db_bttl?createDatabaseIfNotExist=true";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "8112@3";
-
 
     public static Connection openConnection() throws SQLException {
         try{

@@ -1,0 +1,141 @@
+CREATE DATABASE IF NOT EXISTS App_db;
+USE App_db;
+
+-- Create Course table
+CREATE TABLE Course (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT NOT NULL
+);
+
+-- Create Student table
+CREATE TABLE Student (
+    id CHAR(5) PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    phone VARCHAR(15) NOT NULL UNIQUE,
+    sex BIT NOT NULL,
+    bod DATE NOT NULL,
+    course_id INT NOT NULL,
+    avatar TEXT,
+    status BIT NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES Course(id)
+);
+
+-- Stored procedures
+
+-- Course procedures
+DELIMITER //
+
+-- Get all courses
+CREATE PROCEDURE sp_getAllCourses()
+BEGIN
+    SELECT * FROM Course;
+END //
+
+-- Get course by ID
+CREATE PROCEDURE sp_getCourseById(IN course_id INT)
+BEGIN
+    SELECT * FROM Course WHERE id = course_id;
+END //
+
+-- Add new course
+CREATE PROCEDURE sp_addCourse(IN c_name VARCHAR(100), IN c_description TEXT)
+BEGIN
+    INSERT INTO Course(name, description) VALUES(c_name, c_description);
+END //
+
+-- Update course
+CREATE PROCEDURE sp_updateCourse(IN c_id INT, IN c_name VARCHAR(100), IN c_description TEXT)
+BEGIN
+    UPDATE Course SET name = c_name, description = c_description WHERE id = c_id;
+END //
+
+-- Delete course (only if no students)
+CREATE PROCEDURE sp_deleteCourse(IN c_id INT)
+BEGIN
+    DECLARE student_count INT;
+    SELECT COUNT(*) INTO student_count FROM Student WHERE course_id = c_id;
+
+    IF student_count = 0 THEN
+        DELETE FROM Course WHERE id = c_id;
+        SELECT 1 AS result; -- Success
+    ELSE
+        SELECT 0 AS result; -- Failure
+    END IF;
+END //
+
+-- Student procedures
+
+-- Get all students
+CREATE PROCEDURE sp_getAllStudents()
+BEGIN
+    SELECT s.*, c.name AS course_name
+    FROM Student s JOIN Course c ON s.course_id = c.id;
+END //
+
+-- Get student by ID
+CREATE PROCEDURE sp_getStudentById(IN s_id CHAR(5))
+BEGIN
+    SELECT s.*, c.name AS course_name
+    FROM Student s JOIN Course c ON s.course_id = c.id
+    WHERE s.id = s_id;
+END //
+
+-- Add new student
+CREATE PROCEDURE sp_addStudent(
+    IN s_id CHAR(5),
+    IN s_name VARCHAR(200),
+    IN s_email TEXT,
+    IN s_phone VARCHAR(15),
+    IN s_sex BIT,
+    IN s_bod DATE,
+    IN s_course_id INT,
+    IN s_avatar TEXT,
+    IN s_status BIT
+)
+BEGIN
+    INSERT INTO Student(id, name, email, phone, sex, bod, course_id, avatar, status)
+    VALUES(s_id, s_name, s_email, s_phone, s_sex, s_bod, s_course_id, s_avatar, s_status);
+END //
+
+-- Update student
+CREATE PROCEDURE sp_updateStudent(
+    IN s_id CHAR(5),
+    IN s_name VARCHAR(200),
+    IN s_email TEXT,
+    IN s_phone VARCHAR(15),
+    IN s_sex BIT,
+    IN s_bod DATE,
+    IN s_course_id INT,
+    IN s_avatar TEXT,
+    IN s_status BIT
+)
+BEGIN
+    UPDATE Student
+    SET name = s_name,
+        email = s_email,
+        phone = s_phone,
+        sex = s_sex,
+        bod = s_bod,
+        course_id = s_course_id,
+        avatar = s_avatar,
+        status = s_status
+    WHERE id = s_id;
+END //
+
+-- Delete student
+CREATE PROCEDURE sp_deleteStudent(IN s_id CHAR(5))
+BEGIN
+    DELETE FROM Student WHERE id = s_id;
+END //
+
+-- Search students by name
+CREATE PROCEDURE sp_searchStudentsByName(IN s_name VARCHAR(200))
+BEGIN
+    SELECT s.*, c.name AS course_name
+    FROM Student s JOIN Course c ON s.course_id = c.id
+    WHERE s.name LIKE CONCAT('%', s_name, '%');
+END //
+
+DELIMITER ;
